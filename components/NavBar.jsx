@@ -38,6 +38,11 @@ const NavBar = () => {
               {user && (
                 <>
                   <NavItem>
+                    <PageLink href="/cat" className="nav-link" testId="navbar-home">
+                      Editar Catalogo
+                    </PageLink>
+                  </NavItem>
+                  <NavItem>
                     <PageLink href="/csr" className="nav-link" testId="navbar-csr">
                       Client-side rendered page
                     </PageLink>
