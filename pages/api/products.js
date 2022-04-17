@@ -3,34 +3,64 @@ import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 // const client = new PrismaClient();
 let productos = [];
 
-export default withApiAuthRequired(async function shows(req, res) {
+let products = [
+  {
+    name: 'zapato',
+    price: 666,
+    stock: 666,
+    src: 'https://img.lalr.co/cms/2017/12/05165632/Zapatos.jpg?size=sm'
+  },
+  {
+    name: 'libro',
+    price: 3,
+    stock: 50,
+    src: 'https://i.blogs.es/aa76de/libro/1366_2000.jpg'
+  },
+  {
+    name: 'tomate',
+    price: 1,
+    stock: 25,
+    src: 'https://media.istockphoto.com/photos/tomato-picture-id174930196?k=20&m=174930196&s=612x612&w=0&h=Jb_NdxzsIVeGYEDKIQGZ_47cWpEyxb0fEowooTpnc-g='
+  }
+];
+export default async function (req, res) {
+  if (req.method == 'GET') {
+    res.status(200).json(products);
+  } else {
+    return test(req, res);
+  }
+}
+// export default withApiAuthRequired(async function shows(req, res) {
+const test = withApiAuthRequired(async function shows(req, res) {
   try {
     // obtener productos
     if (req.method == 'GET') {
-      // const products = await client.productos.findMany();
-      res.status(200).json(productos);
+      console.log(products);
+      res.status(200).json(products);
     }
 
     // crear productos
     else if (req.method == 'POST') {
-      // const { name, price, stock } = JSON.parse(req.body);
-      // await client.productos.create({
-      //   data: {
-      //     name,
-      //     price,
-      //     stock
-      //   }
-      // });
+      products.push(JSON.parse(req.body));
+      res.status(201).send();
     }
 
     // modificar productos
     else if (req.method == 'PUT') {
+      const { id, name, price, stock } = JSON.parse(req.body);
+      products[id] = {
+        name,
+        price,
+        stock
+      };
+      res.status(202).send();
     }
 
     // eliminar productos
     else if (req.method == 'DELETE') {
-    } else {
-      res.status(400).json({ error: 'invalid method' });
+      const { id } = JSON.parse(req.body);
+      products.splice(id, 1);
+      res.status(202).send();
     }
   } catch (error) {
     res.status(error.status || 500).json({ error: error.message });
