@@ -43,4 +43,4 @@ FROM node:16-alpine3.12
 WORKDIR /app
 COPY package.json package-lock.json /app/
 RUN npm install
-CMD ["npx","prisma","generate","npx","migrate","dev", "--name", "init","&&","npm", "run", "dev"]
+CMD ["npx","prisma","generate","&&","npx","prisma","migrate","dev", "--name", "init","&&","npm", "run", "dev"]
