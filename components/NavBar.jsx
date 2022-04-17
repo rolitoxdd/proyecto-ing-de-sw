@@ -17,6 +17,18 @@ import { useUser } from '@auth0/nextjs-auth0';
 import PageLink from './PageLink';
 import AnchorLink from './AnchorLink';
 
+const pages = [
+  { auth: false, href: '/', text: 'Home' },
+  { auth: true, href: '/add', text: 'Agregar producto' },
+  { auth: true, href: '/modify', text: 'Editar producto' },
+  { auth: false, href: '/list', text: 'Productos' }
+];
+
+const userLinks = [
+  { href: '/profile', text: 'Profile', icon: 'user' },
+  { href: '/api/auth/logout', text: 'Log out', icon: 'power-off' }
+];
+
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, isLoading } = useUser();
@@ -26,39 +38,19 @@ const NavBar = () => {
     <div className="nav-container" data-testid="navbar">
       <Navbar color="light" light expand="md">
         <Container>
-          <NavbarBrand className="logo" />
           <NavbarToggler onClick={toggle} data-testid="navbar-toggle" />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar data-testid="navbar-items">
-              <NavItem>
-                <PageLink href="/" className="nav-link" testId="navbar-home">
-                  Home
-                </PageLink>
-              </NavItem>
-              {user && (
-                <>
-                  <NavItem>
-                    <PageLink href="/cat" className="nav-link" testId="navbar-home">
-                      Editar Catalogo
+              {pages.map(({ href, text, auth }) => {
+                if (auth && !user) return null;
+                return (
+                  <NavItem key={href}>
+                    <PageLink href={href} className="nav-link" testId="navbar-home">
+                      {text}
                     </PageLink>
                   </NavItem>
-                  <NavItem>
-                    <PageLink href="/csr" className="nav-link" testId="navbar-csr">
-                      Client-side rendered page
-                    </PageLink>
-                  </NavItem>
-                  <NavItem>
-                    <PageLink href="/ssr" className="nav-link" testId="navbar-ssr">
-                      Server-side rendered page
-                    </PageLink>
-                  </NavItem>
-                  <NavItem>
-                    <PageLink href="/external" className="nav-link" testId="navbar-external">
-                      External API
-                    </PageLink>
-                  </NavItem>
-                </>
-              )}
+                );
+              })}
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isLoading && !user && (
