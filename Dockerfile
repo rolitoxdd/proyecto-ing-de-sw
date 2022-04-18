@@ -43,4 +43,5 @@ FROM node:16-alpine3.12
 WORKDIR /app
 COPY package.json package-lock.json /app/
 RUN npm install
-CMD ["npm", "run", "dev"]
+# CMD ["npx","prisma","generate","&&","npx","prisma","migrate","dev", "--name", "init","&&","npm", "run", "dev"]
+CMD npx prisma generate && sleep 8 && npx prisma migrate dev --create-only && npx prisma migrate deploy --schema=./prisma/schema.prisma && npx prisma db seed && npm run dev
