@@ -5,12 +5,12 @@ services:
     image: mariadb:10.3
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: notSecureChangeMe
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test
     ports:
       - 3306:3306
-    volumes:
-      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-
+    # volumes:
+      # - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
   phpmyadmin:
     image: phpmyadmin
     restart: always

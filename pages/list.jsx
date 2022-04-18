@@ -14,12 +14,12 @@ export default function List() {
     <>
       <div className="next-steps my-5" data-testid="content">
         <ListGroup>
-          {products.map(({ name, src, price }, index) => (
+          {products.map(({ name, img, price }, index) => (
             <ListGroupItem>
               <Card key={name}>
                 <Row className="no-gutters">
                   <Col className="md-2">
-                    <CardImg alt={name} src={src} top width="100%" />
+                    <CardImg alt={name} src={img} top width="100%" />
                   </Col>
                   <Col className="md-10">
                     <CardBody>

@@ -51,6 +51,9 @@
     "prettier": "^2.2.1",
     "start-server-and-test": "^1.11.7"
   },
+  "prisma": {
+    "seed": "node seed.js"
+  },
   "jest": {
     "testEnvironment": "jsdom",
     "rootDir": "./",
