@@ -30,7 +30,7 @@ const ListCard = ({products}) => {
 								${price}
 							</Typography>
 							{ user && 
-							<Button size="small" align="right" variant="contained" href={`list/${id}`} sx={{ml : 20}}>Details</Button>
+							<Button size="small" align="right" variant="contained" href={`edit/${id}`} sx={{ml : 20}}>Details</Button>
 							}
 						</CardActions>
 					</CardActionArea>
