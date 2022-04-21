@@ -8,7 +8,6 @@ export default function List() {
   let htmlDeProductos = [];
   useEffect(async () => {
     const res = await fetch('./api/products');
-   console.log("res", res)
    const data = await res.json();
     setProducts(data);
   }, []);
@@ -18,7 +17,6 @@ export default function List() {
   return (
     <>
       <div className="next-steps my-5" data-testid="content">
-          aaaaxd
         {/* <ul>{htmlDeProductos}</ul> */}
         {/* <CardColumns>
           {products.map(({ name, img, price }, index) => (
