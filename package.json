@@ -6,6 +6,7 @@
     "dev": "concurrently \"next dev\" \"node api-server\"",
     "dev:api": "nodemon api-server",
     "build": "next build",
+    "serve":"next start",
     "start": "concurrently \"next start\" \"node api-server\"",
     "start:api": "node api-server",
     "test": "jest tests --coverage --maxWorkers=10",

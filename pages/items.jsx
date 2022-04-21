@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 export default function Items() {
+  let data;
   const [products, setProducts] = useState([]);
-  useEffect(() => {
+  useEffect(async () => {
     const res = await fetch('/api/products');
-    const data = await res.json();
+    data = await res.json();
     setProducts(data);
   }, []);
   return (
     <>
-      {data.length &&
-        data.map(p => (
+      {products.length &&
+        products.map(p => (
           <li>
             {p.name} - {p.price}
           </li>
