@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ListGroupItem, ListGroup, CardGroup } from 'reactstrap';
 import ProductCard from '../components/ProductCard';
 import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Button, Row, Col, CardColumns } from 'reactstrap';
+import ListCard from '../components/ListCards';
 
 export default function List() {
   const [products, setProducts] = useState([]); // name, img, price, details, stock
@@ -15,30 +16,6 @@ export default function List() {
     htmlDeProductos.push(<li style={{ background: 'red', color: 'white' }}>{prod.name}</li>);
   }
   return (
-    <>
-      <div className="next-steps my-5" data-testid="content">
-        {/* <ul>{htmlDeProductos}</ul> */}
-        <CardColumns>
-          {products.map(({ name, img, price }, index) => (
-            <Card key={name}>
-              <Row className="no-gutters">
-                <Col className="md-2">
-                  <CardImg alt={name} src={img} top width="100%" />
-                </Col>
-                <Col className="md-10">
-                  <CardBody>
-                    <CardTitle tag="h5">{name}</CardTitle>
-                    <CardSubtitle className="mb-2 text-muted" tag="h6">
-                      {price}
-                    </CardSubtitle>
-                    <Button>Button</Button>
-                  </CardBody>
-                </Col>
-              </Row>
-            </Card>
-          ))}
-        </CardColumns>
-      </div>
-    </>
+    <ListCard products={products}/>
   );
 }
