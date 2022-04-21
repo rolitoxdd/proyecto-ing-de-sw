@@ -1,6 +1,6 @@
 import { withApiAuthRequired } from '@auth0/nextjs-auth0';
-import { prisma } from '@prisma/client';
-import client from '../../utils/prisma';
+// import { prisma } from '@prisma/client';
+import client from '../../../utils/prisma';
 // import { PrismaClient } from '@prisma/client';
 
 // const client = new PrismaClient();

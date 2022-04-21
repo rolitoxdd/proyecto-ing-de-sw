@@ -18,7 +18,7 @@ export default function List() {
     <>
       <div className="next-steps my-5" data-testid="content">
         {/* <ul>{htmlDeProductos}</ul> */}
-        {/* <CardColumns>
+        <CardColumns>
           {products.map(({ name, img, price }, index) => (
             <Card key={name}>
               <Row className="no-gutters">
@@ -37,7 +37,7 @@ export default function List() {
               </Row>
             </Card>
           ))}
-        </CardColumns> */}
+        </CardColumns>
       </div>
     </>
   );
