@@ -20,15 +20,7 @@ export const SwipeableTextMobileStepper = () => {
 		setActiveStep(step)	
 	}
 	return (
-		<Grid 
-			container
-			spacing={0}
-			direction="column"
-			alignItems="center"
-			justifyContent="center"
-			style={{minHeight : '200'}}
-			>
-		<Box sx={{maxWidth:400 , flexGrow: 1 }}	>
+		<Box sx={{minWidth:'1600px',  ml : -30}}	>
 			<Paper
 				square
 				elevation={1}
@@ -54,11 +46,11 @@ export const SwipeableTextMobileStepper = () => {
 								{Math.abs(activeStep - index) <= 2 ? (
 									<Box
 										sx={{
-											height: 300,
+											height: '340px',
 											dislpay: 'block',
-											maxWidth: 400,
+											maxWidth: '1600px',
 											overflow: 'hidden',
-												width: '100%',
+												width: '1600px',
 										}}
 										component='img'
 										src={val.src}
@@ -92,5 +84,5 @@ export const SwipeableTextMobileStepper = () => {
 					}
 					/>
 		</Box>
-		</Grid>)
+		)
 }
