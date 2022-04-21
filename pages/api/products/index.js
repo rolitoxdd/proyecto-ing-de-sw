@@ -47,7 +47,9 @@ const test = withApiAuthRequired(async function shows(req, res) {
     // crear productos
     if (req.method == 'POST') {
       // products.push(JSON.parse(req.body));
-      const { name, price, stock, img, details } = req.body;
+      let { name, price, stock, img, details } = req.body;
+      price = Number(price);
+      stock = Number(stock);
       let prismaRes;
       try {
         prismaRes = await client.productos.create({
