@@ -44,18 +44,15 @@ const test = withApiAuthRequired(async function shows(req, res) {
     //   console.log(products);
     //   res.status(200).json(products);
     // }
-
     // crear productos
     if (req.method == 'POST') {
       // products.push(JSON.parse(req.body));
-      const { name, price, stock, img, details } = JSON.parse(req.body);
-
+      const { name, price, stock, img, details } = req.body;
       let prismaRes;
       try {
         prismaRes = await client.productos.create({
           data: { name, price, stock, img, details }
         });
-        console.log(prismaRes);
       } catch (err) {
         console.error(err);
         throw new Error('falló la bdd :(');
@@ -65,7 +62,9 @@ const test = withApiAuthRequired(async function shows(req, res) {
 
     // modificar productos
     else if (req.method == 'PUT') {
-      const { id, name, price, stock, img, details } = JSON.parse(req.body);
+      const { name, price, stock, img, details } = req.body;
+      let { id } = req.body;
+      id = Number(id);
       const prismaRes = await client.productos.update({
         where: { id },
         data: { name, price, stock, img, details }

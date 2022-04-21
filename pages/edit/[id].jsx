@@ -47,12 +47,14 @@ export default function Edit({ databaseData }) {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const res = await fetch(`/api/products/${id}`, {
+    console.log(e);
+    const res = await fetch(`/api/products/`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ ...data, id })
     });
     const json = await res.json();
+    console.log(json);
     if (json.error) {
       alert(json.error);
     } else {
@@ -65,7 +67,6 @@ export default function Edit({ databaseData }) {
   //     .then(res => res.json())
   //     .then(json => setData(json));
   // }, [router]);
-  console.log(data);
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
