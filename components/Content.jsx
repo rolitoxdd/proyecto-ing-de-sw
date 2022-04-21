@@ -13,17 +13,18 @@ const Content = ({ contentData }) => (
     {/* <Row className="d-flex justify-content-between" data-testid="content-items"> */}
     <CardGroup>
       {contentData.map(({ name, price, src }, i) => (
-        <ProductCard key={name} name={name} price={price} src={src} />
-        // <Card key={name}>
-        //   <CardImg alt={name} src={src} top width="100%" />
-        //   <CardBody>
-        //     <CardTitle tag="h5">{name}</CardTitle>
-        //     <CardSubtitle className="mb-2 text-muted" tag="h6">
-        //       {price}
-        //     </CardSubtitle>
-        //     <Button>Button</Button>
-        //   </CardBody>
-        // </Card>
+        <>
+          <ProductCard key={name} name={name} price={price} src={src} /><Card key={name}>
+            <CardImg alt={name} src={src} top width="100%" />
+            <CardBody>
+              <CardTitle tag="h5">{name}</CardTitle>
+              <CardSubtitle className="mb-2 text-muted" tag="h6">
+                {price}
+              </CardSubtitle>
+              <Button>Button</Button>
+            </CardBody>
+          </Card>
+        </>
       ))}
     </CardGroup>
     {/* </Row> */}
