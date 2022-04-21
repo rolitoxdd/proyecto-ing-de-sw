@@ -1,9 +1,10 @@
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 // import { Input, FormControl, TextField } from '@mui/material';
+
 import { useEffect, useState } from 'react';
 import Form from '../../components/Form';
-
-export default function Edit({ databaseData }) {
+function Edit({ databaseData }) {
   const router = useRouter();
   const [data, setData] = useState(databaseData);
   const { id } = router.query;
@@ -84,3 +85,5 @@ export async function getServerSideProps(context) {
   console.log(databaseData);
   return { props: { databaseData } };
 }
+
+export default withPageAuthRequired(Edit);

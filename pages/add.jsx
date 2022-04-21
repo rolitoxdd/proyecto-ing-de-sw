@@ -1,9 +1,10 @@
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 // import { Input, FormControl, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Form from '../components/Form';
 
-export default function Add({ databaseData }) {
+function Add({ databaseData }) {
   const router = useRouter();
   const [data, setData] = useState({ name: '', price: '', stock: '', img: '', details: '' });
   const inputs = [
@@ -74,3 +75,4 @@ export default function Add({ databaseData }) {
     </>
   );
 }
+export default withPageAuthRequired(Add);
