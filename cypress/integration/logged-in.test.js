@@ -2,7 +2,9 @@ const EMAIL = Cypress.env('USER_EMAIL');
 const PASSWORD = Cypress.env('USER_PASSWORD');
 
 if (!EMAIL || !PASSWORD) {
-  throw new Error('You must provide CYPRESS_USER_EMAIL and CYPRESS_USER_PASSWORD environment variables');
+  throw new Error(
+    'You must provide CYPRESS_USER_EMAIL and CYPRESS_USER_PASSWORD environment variables'
+  );
 }
 
 const login = () => {

@@ -14,11 +14,15 @@ const issuerBaseUrl = process.env.AUTH0_ISSUER_BASE_URL;
 const audience = process.env.AUTH0_AUDIENCE;
 
 if (!baseUrl || !issuerBaseUrl) {
-  throw new Error('Please make sure that the file .env.local is in place and populated');
+  throw new Error(
+    'Please make sure that the file .env.local is in place and populated'
+  );
 }
 
 if (!audience) {
-  console.log('AUTH0_AUDIENCE not set in .env.local. Shutting down API server.');
+  console.log(
+    'AUTH0_AUDIENCE not set in .env.local. Shutting down API server.'
+  );
   process.exit(1);
 }
 
@@ -44,5 +48,7 @@ app.get('/api/shows', checkJwt, (req, res) => {
   });
 });
 
-const server = app.listen(port, () => console.log(`API Server listening on port ${port}`));
+const server = app.listen(port, () =>
+  console.log(`API Server listening on port ${port}`)
+);
 process.on('SIGINT', () => server.close());

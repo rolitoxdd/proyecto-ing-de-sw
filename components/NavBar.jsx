@@ -45,7 +45,11 @@ const NavBar = () => {
                 if (auth && !user) return null;
                 return (
                   <NavItem key={href}>
-                    <PageLink href={href} className="nav-link" testId="navbar-home">
+                    <PageLink
+                      href={href}
+                      className="nav-link"
+                      testId="navbar-home"
+                    >
                       {text}
                     </PageLink>
                   </NavItem>
@@ -59,13 +63,18 @@ const NavBar = () => {
                     href="/api/auth/login"
                     className="btn btn-primary btn-margin"
                     tabIndex={0}
-                    testId="navbar-login-desktop">
+                    testId="navbar-login-desktop"
+                  >
                     Log in
                   </AnchorLink>
                 </NavItem>
               )}
               {user && (
-                <UncontrolledDropdown nav inNavbar data-testid="navbar-menu-desktop">
+                <UncontrolledDropdown
+                  nav
+                  inNavbar
+                  data-testid="navbar-menu-desktop"
+                >
                   <DropdownToggle nav caret id="profileDropDown">
                     <img
                       src={user.picture}
@@ -82,12 +91,20 @@ const NavBar = () => {
                       {user.name}
                     </DropdownItem>
                     <DropdownItem className="dropdown-profile" tag="span">
-                      <PageLink href="/profile" icon="user" testId="navbar-profile-desktop">
+                      <PageLink
+                        href="/profile"
+                        icon="user"
+                        testId="navbar-profile-desktop"
+                      >
                         Profile
                       </PageLink>
                     </DropdownItem>
                     <DropdownItem id="qsLogoutBtn">
-                      <AnchorLink href="/api/auth/logout" icon="power-off" testId="navbar-logout-desktop">
+                      <AnchorLink
+                        href="/api/auth/logout"
+                        icon="power-off"
+                        testId="navbar-logout-desktop"
+                      >
                         Log out
                       </AnchorLink>
                     </DropdownItem>
@@ -101,7 +118,8 @@ const NavBar = () => {
                   href="/api/auth/login"
                   className="btn btn-primary btn-block"
                   tabIndex={0}
-                  testId="navbar-login-mobile">
+                  testId="navbar-login-mobile"
+                >
                   Log in
                 </AnchorLink>
               </Nav>
@@ -111,7 +129,8 @@ const NavBar = () => {
                 id="nav-mobile"
                 className="d-md-none justify-content-between"
                 navbar
-                data-testid="navbar-menu-mobile">
+                data-testid="navbar-menu-mobile"
+              >
                 <NavItem>
                   <span className="user-info">
                     <img
@@ -123,13 +142,20 @@ const NavBar = () => {
                       decode="async"
                       data-testid="navbar-picture-mobile"
                     />
-                    <h6 className="d-inline-block" data-testid="navbar-user-mobile">
+                    <h6
+                      className="d-inline-block"
+                      data-testid="navbar-user-mobile"
+                    >
                       {user.name}
                     </h6>
                   </span>
                 </NavItem>
                 <NavItem>
-                  <PageLink href="/profile" icon="user" testId="navbar-profile-mobile">
+                  <PageLink
+                    href="/profile"
+                    icon="user"
+                    testId="navbar-profile-mobile"
+                  >
                     Profile
                   </PageLink>
                 </NavItem>
@@ -138,7 +164,8 @@ const NavBar = () => {
                     href="/api/auth/logout"
                     className="btn btn-link p-0"
                     icon="power-off"
-                    testId="navbar-logout-mobile">
+                    testId="navbar-logout-mobile"
+                  >
                     Log out
                   </AnchorLink>
                 </NavItem>

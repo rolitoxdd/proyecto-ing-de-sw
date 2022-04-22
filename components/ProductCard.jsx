@@ -1,4 +1,11 @@
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import {
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Button
+} from 'reactstrap';
 
 export default function ProductCard({ name, price, src }) {
   return (

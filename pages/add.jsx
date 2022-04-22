@@ -6,7 +6,13 @@ import Form from '../components/Form';
 
 function Add() {
   const router = useRouter();
-  const [data, setData] = useState({ name: '', price: '', stock: '', img: '', details: '' });
+  const [data, setData] = useState({
+    name: '',
+    price: '',
+    stock: '',
+    img: '',
+    details: ''
+  });
   const inputs = [
     {
       label: 'name',
