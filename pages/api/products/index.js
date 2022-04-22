@@ -76,8 +76,9 @@ const test = withApiAuthRequired(async function shows(req, res) {
 
     // eliminar productos
     else if (req.method == 'DELETE') {
-      const { id } = JSON.parse(req.body);
-      const prismaRes = await productos.delete({ where: { id } });
+      let { id } = req.body;
+      id = Number(id);
+      const prismaRes = await client.productos.delete({ where: { id } });
       res.status(202).json(prismaRes);
     }
   } catch (error) {

@@ -65,8 +65,10 @@ function Edit({ databaseData }) {
   };
 
   const handleDelete = async () => {
-    const res = await fetch(`/api/products/${id}`, {
-      method: 'DELETE'
+    const res = await fetch(`/api/products/`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id })
     });
     const json = await res.json();
     console.log(json);
