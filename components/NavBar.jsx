@@ -20,7 +20,6 @@ import AnchorLink from './AnchorLink';
 const pages = [
   { auth: false, href: '/', text: 'Home' },
   { auth: true, href: '/add', text: 'Agregar producto' },
-  { auth: true, href: '/modify', text: 'Editar producto' },
   { auth: false, href: '/list', text: 'Productos' }
 ];
 
@@ -48,8 +47,7 @@ const NavBar = () => {
                     <PageLink
                       href={href}
                       className="nav-link"
-                      testId="navbar-home"
-                    >
+                      testId="navbar-home">
                       {text}
                     </PageLink>
                   </NavItem>
@@ -63,8 +61,7 @@ const NavBar = () => {
                     href="/api/auth/login"
                     className="btn btn-primary btn-margin"
                     tabIndex={0}
-                    testId="navbar-login-desktop"
-                  >
+                    testId="navbar-login-desktop">
                     Log in
                   </AnchorLink>
                 </NavItem>
@@ -73,8 +70,7 @@ const NavBar = () => {
                 <UncontrolledDropdown
                   nav
                   inNavbar
-                  data-testid="navbar-menu-desktop"
-                >
+                  data-testid="navbar-menu-desktop">
                   <DropdownToggle nav caret id="profileDropDown">
                     <img
                       src={user.picture}
@@ -94,8 +90,7 @@ const NavBar = () => {
                       <PageLink
                         href="/profile"
                         icon="user"
-                        testId="navbar-profile-desktop"
-                      >
+                        testId="navbar-profile-desktop">
                         Profile
                       </PageLink>
                     </DropdownItem>
@@ -103,8 +98,7 @@ const NavBar = () => {
                       <AnchorLink
                         href="/api/auth/logout"
                         icon="power-off"
-                        testId="navbar-logout-desktop"
-                      >
+                        testId="navbar-logout-desktop">
                         Log out
                       </AnchorLink>
                     </DropdownItem>
@@ -118,8 +112,7 @@ const NavBar = () => {
                   href="/api/auth/login"
                   className="btn btn-primary btn-block"
                   tabIndex={0}
-                  testId="navbar-login-mobile"
-                >
+                  testId="navbar-login-mobile">
                   Log in
                 </AnchorLink>
               </Nav>
@@ -129,8 +122,7 @@ const NavBar = () => {
                 id="nav-mobile"
                 className="d-md-none justify-content-between"
                 navbar
-                data-testid="navbar-menu-mobile"
-              >
+                data-testid="navbar-menu-mobile">
                 <NavItem>
                   <span className="user-info">
                     <img
@@ -144,8 +136,7 @@ const NavBar = () => {
                     />
                     <h6
                       className="d-inline-block"
-                      data-testid="navbar-user-mobile"
-                    >
+                      data-testid="navbar-user-mobile">
                       {user.name}
                     </h6>
                   </span>
@@ -154,8 +145,7 @@ const NavBar = () => {
                   <PageLink
                     href="/profile"
                     icon="user"
-                    testId="navbar-profile-mobile"
-                  >
+                    testId="navbar-profile-mobile">
                     Profile
                   </PageLink>
                 </NavItem>
@@ -164,8 +154,7 @@ const NavBar = () => {
                     href="/api/auth/logout"
                     className="btn btn-link p-0"
                     icon="power-off"
-                    testId="navbar-logout-mobile"
-                  >
+                    testId="navbar-logout-mobile">
                     Log out
                   </AnchorLink>
                 </NavItem>

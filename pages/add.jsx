@@ -76,7 +76,11 @@ function Add() {
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Form inputs={inputs} handleSubmit={handleSubmit} />
+        <Form
+          inputs={inputs}
+          handleSubmit={handleSubmit}
+          title="Agregar nuevo producto"
+        />
       </div>
     </>
   );

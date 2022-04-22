@@ -5,7 +5,8 @@ import {
   CardContent,
   CardMedia,
   Grid,
-  Typography
+  Typography,
+  Container
 } from '@mui/material';
 import React from 'react';
 import { Button } from '@mui/material';
@@ -17,7 +18,9 @@ const ListCard = ({ products }) => {
     <Grid container spacing={2}>
       {products.map(({ name, img, price, details, id }, index) => (
         <Grid item xs={4}>
-          <Card sx={{ maxWidth: 300, pt: 2 }} key={id}>
+          <Card
+            sx={{ maxWidth: 300, pt: 2, minHeight: 500, display: 'flex' }}
+            key={id}>
             <CardActionArea>
               <CardMedia component="img" height="240" image={img} alt={name} />
               <CardContent>
@@ -29,7 +32,13 @@ const ListCard = ({ products }) => {
                 </Typography>
               </CardContent>
               <CardActions
-                sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between'
+                }}>
                 <Typography variant="h6" color="purple" align="left">
                   ${price}
                 </Typography>
@@ -40,7 +49,7 @@ const ListCard = ({ products }) => {
                     variant="contained"
                     href={`edit/${id}`}
                     sx={{}}>
-                    Details
+                    Edit
                   </Button>
                 )}
               </CardActions>

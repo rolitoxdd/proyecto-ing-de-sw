@@ -11,7 +11,7 @@ import {
   Card
 } from '@mui/material';
 
-export default function Form({ inputs, handleSubmit }) {
+export default function Form({ title, inputs, handleSubmit }) {
   console.log(inputs);
   return (
     <>
@@ -19,10 +19,9 @@ export default function Form({ inputs, handleSubmit }) {
         component="form"
         onSubmit={handleSubmit}
         noValidate
-        autoComplete="off"
-      >
+        autoComplete="off">
         <Card sx={{ p: 2 }}>
-          <CardHeader title={`Editar valores del producto`} align="center" />
+          <CardHeader title={title} align="center" />
           <Grid container spacing={2}>
             {inputs.map(data => (
               <Grid item xs={4}>

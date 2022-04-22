@@ -1,6 +1,7 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 // import { Input, FormControl, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 
 import { useEffect, useState } from 'react';
 import Form from '../../components/Form';
@@ -63,6 +64,19 @@ function Edit({ databaseData }) {
     }
   };
 
+  const handleDelete = async () => {
+    const res = await fetch(`/api/products/${id}`, {
+      method: 'DELETE'
+    });
+    const json = await res.json();
+    console.log(json);
+    if (json.error) {
+      alert(json.error);
+    } else {
+      router.push('/');
+    }
+  };
+
   // useEffect(() => {
   //   fetch(`/api/products/${id}`)
   //     .then(res => res.json())
@@ -70,8 +84,19 @@ function Edit({ databaseData }) {
   // }, [router]);
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Form inputs={inputs} handleSubmit={handleSubmit} />
+      <div style={{}}>
+        <Form
+          inputs={inputs}
+          handleSubmit={handleSubmit}
+          title="Editar información del producto"
+        />
+        <Button
+          variant="contained"
+          color="error"
+          onClick={handleDelete}
+          sx={{ width: '60%', m: 'auto', mt: 2, display: 'block' }}>
+          DELETE
+        </Button>
       </div>
     </>
   );
