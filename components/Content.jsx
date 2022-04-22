@@ -1,5 +1,16 @@
 import React from 'react';
-import { Row, Col, CardGroup, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Button } from 'reactstrap';
+import {
+  Row,
+  Col,
+  CardGroup,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText,
+  Button
+} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductCard from './ProductCard';
 
@@ -14,7 +25,8 @@ const Content = ({ contentData }) => (
     <CardGroup>
       {contentData.map(({ name, price, src }, i) => (
         <>
-          <ProductCard key={name} name={name} price={price} src={src} /><Card key={name}>
+          <ProductCard key={name} name={name} price={price} src={src} />
+          <Card key={name}>
             <CardImg alt={name} src={src} top width="100%" />
             <CardBody>
               <CardTitle tag="h5">{name}</CardTitle>

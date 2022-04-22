@@ -14,7 +14,10 @@ function Profile() {
       {isLoading && <Loading />}
       {user && (
         <>
-          <Row className="align-items-center profile-header mb-5 text-center text-md-left" data-testid="profile">
+          <Row
+            className="align-items-center profile-header mb-5 text-center text-md-left"
+            data-testid="profile"
+          >
             <Col md={2}>
               <img
                 src={user.picture}

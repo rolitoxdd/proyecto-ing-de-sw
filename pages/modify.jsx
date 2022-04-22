@@ -29,22 +29,38 @@ export default withPageAuthRequired(function Test() {
     <form onSubmit={handleSubmit}>
       <label>
         ID del producto a editar
-        <input type="number" value={index} onChange={e => setIndex(e.target.value)} />
+        <input
+          type="number"
+          value={index}
+          onChange={e => setIndex(e.target.value)}
+        />
       </label>
       <br />
       <label>
         Nuevo nombre del producto
-        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+        <input
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
       </label>
       <br />
       <label>
         Nuevo precio del producto
-        <input type="number" value={price} onChange={e => setPrice(e.target.value)} />
+        <input
+          type="number"
+          value={price}
+          onChange={e => setPrice(e.target.value)}
+        />
       </label>
       <br />
       <label>
         Nuevo stock del producto
-        <input type="number" value={stock} onChange={e => setStock(e.target.value)} />
+        <input
+          type="number"
+          value={stock}
+          onChange={e => setStock(e.target.value)}
+        />
       </label>
       <br />
       <button type="submit">Submit</button>

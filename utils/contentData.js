@@ -3,7 +3,7 @@ const contentData = [
     name: 'zapato',
     price: 666,
     stock: 666,
-      src: 'https://media.spdigital.cl/file_upload/Desktop%20-%20Home%20-%20Hero%20-%20Tarjetas%20asus-AFPSMIL%2020-04-2022_bf63190f.png'
+    src: 'https://media.spdigital.cl/file_upload/Desktop%20-%20Home%20-%20Hero%20-%20Tarjetas%20asus-AFPSMIL%2020-04-2022_bf63190f.png'
   },
   {
     name: 'libro',
@@ -15,7 +15,7 @@ const contentData = [
     name: 'xd',
     price: 3,
     stock: 10,
-    src: 'https://media.spdigital.cl/file_upload/Desktop%20-%20Home%20-%20Heroliquidaci%C3%B3n_%2007-04-2022_7bd012e8.png',
+    src: 'https://media.spdigital.cl/file_upload/Desktop%20-%20Home%20-%20Heroliquidaci%C3%B3n_%2007-04-2022_7bd012e8.png'
   }
   // {
   //   name: 'tomate',

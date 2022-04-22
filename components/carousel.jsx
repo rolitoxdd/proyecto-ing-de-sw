@@ -1,7 +1,14 @@
 import { autoPlay } from 'react-swipeable-views-utils';
 import SwipeableViews from 'react-swipeable-views';
 import contentData from '../utils/contentData';
-import { Box, Button, MobileStepper, Typography, Paper, Grid } from '@mui/material';
+import {
+  Box,
+  Button,
+  MobileStepper,
+  Typography,
+  Paper,
+  Grid
+} from '@mui/material';
 import React from 'react';
 import { useTheme } from '@emotion/react';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
@@ -22,18 +29,6 @@ export const SwipeableTextMobileStepper = () => {
   };
   return (
     <Box sx={{ minWidth: '1600px', ml: -30 }}>
-      <Paper
-        square
-        elevation={1}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          height: 50,
-          pl: 2,
-          bgcolor: 'background.default'
-        }}>
-        <Typography>{contentData[activeStep].name}</Typography>
-      </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction == 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
@@ -63,9 +58,26 @@ export const SwipeableTextMobileStepper = () => {
         position="static"
         activeStep={activeStep}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep == maxSteps - 1}>
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep == maxSteps - 1}>
             Next
-            {theme.direction == 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            {theme.direction == 'rtl' ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        }
+        backButton={
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            {theme.direction === 'rtl' ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Back
           </Button>
         }
       />
