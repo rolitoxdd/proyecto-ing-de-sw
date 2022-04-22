@@ -64,14 +64,20 @@ const test = withApiAuthRequired(async function shows(req, res) {
 
     // modificar productos
     else if (req.method == 'PUT') {
-      const { name, price, stock, img, details } = req.body;
-      let { id } = req.body;
+      let { id, name, price, stock, img, details } = req.body;
       id = Number(id);
-      const prismaRes = await client.productos.update({
-        where: { id },
-        data: { name, price, stock, img, details }
-      });
-      res.status(202).json(prismaRes);
+      price = Number(price);
+      stock = Number(stock);
+      try {
+        const prismaRes = await client.productos.update({
+          where: { id },
+          data: { name, price, stock, img, details }
+        });
+        res.status(202).json(prismaRes);
+      } catch (err) {
+        console.error(err);
+        res.status(error.status || 500).json({ error: error.message });
+      }
     }
 
     // eliminar productos
