@@ -16,6 +16,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 
 import PageLink from './PageLink';
 import AnchorLink from './AnchorLink';
+import Link from 'next/link';
 
 const pages = [
   { auth: false, href: '/', text: 'Home' },
@@ -37,6 +38,18 @@ const NavBar = () => {
     <div className="nav-container" data-testid="navbar">
       <Navbar color="light" light expand="md">
         <Container>
+          <NavbarBrand>
+            <Link href={'/'}>
+              <a>
+                <img
+                  src={
+                    'https://media.discordapp.net/attachments/770475826147360809/966920110809968650/techtoriano.png'
+                  }
+                  style={{ maxHeight: '80px' }}
+                />
+              </a>
+            </Link>
+          </NavbarBrand>
           <NavbarToggler onClick={toggle} data-testid="navbar-toggle" />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar data-testid="navbar-items">
