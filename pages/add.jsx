@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Form from '../components/Form';
 
-function Add({ databaseData }) {
+function Add() {
   const router = useRouter();
   const [data, setData] = useState({ name: '', price: '', stock: '', img: '', details: '' });
   const inputs = [
