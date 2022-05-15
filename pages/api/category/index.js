@@ -10,8 +10,7 @@ export default async function (req, res) {
   }
 }
 
-// const test = withApiAuthRequired(async function shows(req, res) {
-const test = async function shows(req, res) {
+const test = withApiAuthRequired(async function shows(req, res) {
   try {
     if (req.method == 'POST') {
       let { name } = req.body;
@@ -53,4 +52,4 @@ const test = async function shows(req, res) {
   } catch (error) {
     res.status(error.status || 500).json({ error: error.message });
   }
-};
+});
