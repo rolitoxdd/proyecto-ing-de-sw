@@ -1,9 +1,8 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
-// import { Input, FormControl, TextField } from '@mui/material';
 import { Button } from '@mui/material';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Form from '../../components/Form';
 function Edit({ databaseData }) {
   const router = useRouter();
@@ -79,11 +78,6 @@ function Edit({ databaseData }) {
     }
   };
 
-  // useEffect(() => {
-  //   fetch(`/api/products/${id}`)
-  //     .then(res => res.json())
-  //     .then(json => setData(json));
-  // }, [router]);
   return (
     <>
       <div style={{}}>
