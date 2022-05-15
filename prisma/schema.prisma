@@ -12,10 +12,26 @@ datasource db {
 }
 
 model Productos {
-  id      Int     @id @default(autoincrement())
-  name    String
-  price   Int
-  stock   Int     @default(0)
-  img     String?
-  details String?
+  id         Int                     @id @default(autoincrement())
+  name       String
+  price      Int
+  stock      Int                     @default(0)
+  img        String?
+  details    String?
+  categorias CategoriasOnProductos[]
+}
+
+model Categorias {
+  id        Int                     @id @default(autoincrement())
+  name      String
+  productos CategoriasOnProductos[]
+}
+
+model CategoriasOnProductos {
+  category   Categorias @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  productos  Productos  @relation(fields: [productId], references: [id])
+  productId  Int
+
+  @@id([categoryId, productId])
 }
