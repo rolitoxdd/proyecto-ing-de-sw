@@ -101,7 +101,7 @@ function Edit({ databaseData }) {
 export async function getServerSideProps(context) {
   const baseURL = 'http://localhost:3000';
   const { id } = context.query;
-  const res = await fetch(baseURL + `/api/products/${id}`);
+  const res = await fetch(baseURL + `/api/category/${id}`);
   const databaseData = await res.json();
   console.log(databaseData);
   return { props: { databaseData } };

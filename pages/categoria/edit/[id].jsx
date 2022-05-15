@@ -2,7 +2,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
-import Form from '../../components/Form';
+import Form from '../../../components/Form';
 
 function Edit({databaseData}){
     const router = useRouter();
@@ -74,4 +74,13 @@ function Edit({databaseData}){
         </>
       );
 
+}
+
+export async function getServerSideProps(context) {
+  const baseURL = 'http://localhost:3000';
+  const { id } = context.query;
+  const res = await fetch(baseURL + `/api/category/${id}`);
+  const databaseData = await res.json();
+  console.log(databaseData);
+  return { props: { databaseData } };
 }
