@@ -1,9 +1,11 @@
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
+import { useEffect, useState } from 'react';
+import Form from '../../../components/Form';
 
-import { useState } from 'react';
-import Form from '../../components/Form';
+// Implementar autenticacion para pagina final
+
 function Edit({ databaseData }) {
   const router = useRouter();
   const [data, setData] = useState(databaseData);
@@ -17,74 +19,48 @@ function Edit({ databaseData }) {
       onChange: e => setData(data => ({ ...data, name: e.target.value }))
     },
     {
-      label: 'price',
-      type: 'number',
-      value: data.price,
-      required: true,
-      onChange: e => setData(data => ({ ...data, price: e.target.value }))
-    },
-    {
-      label: 'stock',
-      type: 'number',
-      value: data.stock,
-      required: true,
-      onChange: e => setData(data => ({ ...data, stock: e.target.value }))
-    },
-    {
-      label: 'img',
+      label: 'caracteristica',
       type: 'text',
-      value: data.img,
+      value: data.caracteristica,
       required: true,
-      onChange: e => setData(data => ({ ...data, img: e.target.value }))
-    },
-    {
-      label: 'details',
-      type: 'text',
-      value: data.details,
-      required: false,
-      onChange: e => setData(data => ({ ...data, details: e.target.value }))
+      onChange: e =>
+        setData(data => ({ ...data, caracteristica: e.target.value }))
     }
   ];
-
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log(e);
-    const res = await fetch(`/api/products/`, {
+    const res = await fetch(`/api/category/`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data, id })
     });
     const json = await res.json();
-    console.log(json);
     if (json.error) {
       alert(json.error);
     } else {
       router.push('/');
     }
   };
-
   const handleDelete = async () => {
-    const res = await fetch(`/api/products/`, {
+    const res = await fetch(`/api/category/`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id })
     });
     const json = await res.json();
-    console.log(json);
     if (json.error) {
       alert(json.error);
     } else {
       router.push('/');
     }
   };
-
   return (
     <>
       <div style={{}}>
         <Form
           inputs={inputs}
           handleSubmit={handleSubmit}
-          title="Editar información del producto"
+          title="Editar Categoría"
         />
         <Button
           variant="contained"
@@ -103,8 +79,6 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   const res = await fetch(baseURL + `/api/category/${id}`);
   const databaseData = await res.json();
-  console.log(databaseData);
   return { props: { databaseData } };
 }
-
-export default withPageAuthRequired(Edit);
+export default Edit;
