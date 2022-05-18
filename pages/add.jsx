@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Form from '../components/Form';
 
-function Add() {
+function Add({ categories }) {
   const router = useRouter();
   const [data, setData] = useState({
     name: '',
@@ -51,10 +51,18 @@ function Add() {
     }
   ];
 
+  const selects = [
+    {
+      label: 'categorias',
+      options: categories,
+      onChange: e => setData(data => ({ ...data, categories: e }))
+    }
+  ];
+
   const handleSubmit = async e => {
     e.preventDefault();
     console.log(e);
-    const res = await fetch(`/api/products/`, {
+    const res = await fetch(`/api/products`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data })
@@ -68,11 +76,6 @@ function Add() {
     }
   };
 
-  // useEffect(() => {
-  //   fetch(`/api/products/${id}`)
-  //     .then(res => res.json())
-  //     .then(json => setData(json));
-  // }, [router]);
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -80,9 +83,17 @@ function Add() {
           inputs={inputs}
           handleSubmit={handleSubmit}
           title="Agregar nuevo producto"
+          selects={selects}
         />
       </div>
     </>
   );
 }
+export async function getServerSideProps(context) {
+  const baseURL = 'http://localhost:3000';
+  const categoriesRes = await fetch(baseURL + `/api/category`);
+  const categories = await categoriesRes.json();
+  return { props: { categories } };
+}
+
 export default withPageAuthRequired(Add);

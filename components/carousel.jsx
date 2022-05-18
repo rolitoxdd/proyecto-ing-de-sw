@@ -17,7 +17,6 @@ export const SwipeableTextMobileStepper = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = contentData.length;
   const theme = useTheme();
-  console.log('theme', theme);
   const handleNext = () => {
     setActiveStep(prevActiveStep => prevActiveStep + 1);
   };

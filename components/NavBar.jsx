@@ -38,18 +38,18 @@ const NavBar = () => {
     <div className="nav-container" data-testid="navbar">
       <Navbar color="light" light expand="md">
         <Container>
-          <NavbarBrand>
-            <Link href={'/'}>
-              <a>
-                <img
-                  src={
-                    'https://media.discordapp.net/attachments/770475826147360809/966920110809968650/techtoriano.png'
-                  }
-                  style={{ maxHeight: '80px' }}
-                />
-              </a>
-            </Link>
-          </NavbarBrand>
+          {/* <NavbarBrand> */}
+          <Link href={'/'} passHref>
+            <a>
+              <img
+                src={
+                  'https://media.discordapp.net/attachments/770475826147360809/966920110809968650/techtoriano.png'
+                }
+                style={{ maxHeight: '80px' }}
+              />
+            </a>
+          </Link>
+          {/* </NavbarBrand> */}
           <NavbarToggler onClick={toggle} data-testid="navbar-toggle" />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar data-testid="navbar-items">

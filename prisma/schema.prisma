@@ -11,26 +11,26 @@ datasource db {
   url               = env("DATABASE_URL")
 }
 
-model Productos {
-  id         Int                     @id @default(autoincrement())
+model Products {
+  id         Int                    @id @default(autoincrement())
   name       String
   price      Int
-  stock      Int                     @default(0)
+  stock      Int                    @default(0)
   img        String?
   details    String?
-  categorias CategoriasOnProductos[]
+  categories CategoriesOnProducts[]
 }
 
-model Categorias {
-  id        Int                     @id @default(autoincrement())
-  name      String
-  productos CategoriasOnProductos[]
+model Categories {
+  id       Int                    @id @default(autoincrement())
+  name     String
+  products CategoriesOnProducts[]
 }
 
-model CategoriasOnProductos {
-  category   Categorias @relation(fields: [categoryId], references: [id])
+model CategoriesOnProducts {
+  category   Categories @relation(fields: [categoryId], references: [id])
   categoryId Int
-  productos  Productos  @relation(fields: [productId], references: [id])
+  products   Products   @relation(fields: [productId], references: [id])
   productId  Int
 
   @@id([categoryId, productId])

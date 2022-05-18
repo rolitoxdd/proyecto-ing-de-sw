@@ -8,6 +8,10 @@ import Form from '../../../components/Form';
 
 function Edit({ databaseData }) {
   const router = useRouter();
+  useEffect(() => {
+    if (databaseData.error) router.push('/');
+  }, []);
+
   const [data, setData] = useState(databaseData);
   const { id } = router.query;
   const inputs = [
@@ -29,6 +33,7 @@ function Edit({ databaseData }) {
   ];
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log(data);
     const res = await fetch(`/api/category/`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -56,20 +61,26 @@ function Edit({ databaseData }) {
   };
   return (
     <>
-      <div style={{}}>
-        <Form
-          inputs={inputs}
-          handleSubmit={handleSubmit}
-          title="Editar Categoría"
-        />
-        <Button
-          variant="contained"
-          color="error"
-          onClick={handleDelete}
-          sx={{ width: '60%', m: 'auto', mt: 2, display: 'block' }}>
-          DELETE
-        </Button>
-      </div>
+      {databaseData.error ? (
+        <span>
+          {databaseData.error} <br /> Redireccionando...
+        </span>
+      ) : (
+        <div style={{}}>
+          <Form
+            inputs={inputs}
+            handleSubmit={handleSubmit}
+            title="Editar Categoría"
+          />
+          <Button
+            variant="contained"
+            color="error"
+            onClick={handleDelete}
+            sx={{ width: '60%', m: 'auto', mt: 2, display: 'block' }}>
+            DELETE
+          </Button>
+        </div>
+      )}
     </>
   );
 }

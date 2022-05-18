@@ -2,7 +2,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 // import { Input, FormControl, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
-import Form from '../components/Form';
+import Form from '../../components/Form';
 
 function Add() {
   const router = useRouter();
@@ -23,7 +23,8 @@ function Add() {
       type: 'text',
       value: data.price,
       required: true,
-      onChange: e => setData(data => ({ ...data, caracteristica: e.target.value }))
+      onChange: e =>
+        setData(data => ({ ...data, caracteristica: e.target.value }))
     }
   ];
 
@@ -36,7 +37,6 @@ function Add() {
       body: JSON.stringify({ ...data })
     });
     const json = await res.json();
-    console.log(json);
     if (json.error) {
       alert(json.error);
     } else {

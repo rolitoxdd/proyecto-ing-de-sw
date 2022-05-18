@@ -5,5 +5,5 @@ let products = {
   data: testData
 };
 (async () => {
-  await prisma.productos.createMany(products);
+  await prisma.products.createMany(products);
 })();

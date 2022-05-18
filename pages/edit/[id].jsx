@@ -4,9 +4,9 @@ import { Button } from '@mui/material';
 
 import { useState } from 'react';
 import Form from '../../components/Form';
-function Edit({ databaseData }) {
+function Edit({ productsData, categories }) {
   const router = useRouter();
-  const [data, setData] = useState(databaseData);
+  const [data, setData] = useState(productsData);
   const { id } = router.query;
   const inputs = [
     {
@@ -46,21 +46,35 @@ function Edit({ databaseData }) {
     }
   ];
 
+  const selects = [
+    {
+      label: 'categorias',
+      options: categories,
+      defaultValue: data.categories.map(cat => ({
+        value: cat.categoryId,
+        label: categories.find(categ => categ.id == cat.categoryId).name
+      })),
+      // defaultValue: [{ label: 'lol', value: 1 }],
+      onChange: e => setData(data => ({ ...data, categories: e }))
+    }
+  ];
+
   const handleSubmit = async e => {
     e.preventDefault();
     console.log(e);
-    const res = await fetch(`/api/products/`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...data, id })
-    });
-    const json = await res.json();
-    console.log(json);
-    if (json.error) {
-      alert(json.error);
-    } else {
-      router.push('/');
-    }
+    console.log(data);
+    // const res = await fetch(`/api/products/`, {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ ...data, id })
+    // });
+    // const json = await res.json();
+    // console.log(json);
+    // if (json.error) {
+    //   alert(json.error);
+    // } else {
+    //   router.push('/');
+    // }
   };
 
   const handleDelete = async () => {
@@ -85,6 +99,7 @@ function Edit({ databaseData }) {
           inputs={inputs}
           handleSubmit={handleSubmit}
           title="Editar información del producto"
+          selects={selects}
         />
         <Button
           variant="contained"
@@ -101,10 +116,11 @@ function Edit({ databaseData }) {
 export async function getServerSideProps(context) {
   const baseURL = `http://localhost:${process.env.PORT || 3000}`;
   const { id } = context.query;
-  const res = await fetch(baseURL + `/api/category/${id}`);
-  const databaseData = await res.json();
-  console.log(databaseData);
-  return { props: { databaseData } };
+  const productsRes = await fetch(baseURL + `/api/products/${id}`);
+  const categoriesRes = await fetch(baseURL + `/api/category`);
+  const productsData = await productsRes.json();
+  const categories = await categoriesRes.json();
+  return { props: { productsData, categories } };
 }
 
 export default withPageAuthRequired(Edit);

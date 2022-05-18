@@ -3,7 +3,7 @@ import client from '../../../utils/prisma';
 
 export default async function (req, res) {
   if (req.method == 'GET') {
-    const categories = await client.categorias.findMany();
+    const categories = await client.categories.findMany();
     res.status(200).json(categories);
   } else {
     return test(req, res);
@@ -17,7 +17,7 @@ const test = async function shows(req, res) {
       let { name } = req.body;
       let prismaRes;
       try {
-        prismaRes = await client.categorias.create({
+        prismaRes = await client.categories.create({
           data: { name }
         });
       } catch (err) {
@@ -32,7 +32,7 @@ const test = async function shows(req, res) {
       let { id, name } = req.body;
       id = Number(id);
       try {
-        const prismaRes = await client.categorias.update({
+        const prismaRes = await client.categories.update({
           where: { id },
           data: { name }
         });
@@ -47,7 +47,7 @@ const test = async function shows(req, res) {
     else if (req.method == 'DELETE') {
       let { id } = req.body;
       id = Number(id);
-      const prismaRes = await client.categorias.delete({ where: { id } });
+      const prismaRes = await client.categories.delete({ where: { id } });
       res.status(202).json(prismaRes);
     }
   } catch (error) {

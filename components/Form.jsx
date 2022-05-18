@@ -10,9 +10,9 @@ import {
   CardHeader,
   Card
 } from '@mui/material';
+import Select from 'react-select';
 
-export default function Form({ title, inputs, handleSubmit }) {
-  console.log(inputs);
+export default function Form({ title, inputs, handleSubmit, selects = [] }) {
   return (
     <>
       <Box
@@ -20,21 +20,37 @@ export default function Form({ title, inputs, handleSubmit }) {
         onSubmit={handleSubmit}
         noValidate
         autoComplete="off">
-        <Card sx={{ p: 2 }}>
+        <Card sx={{ p: 2, overflow: 'unset' }}>
           <CardHeader title={title} align="center" />
           <Grid container spacing={2}>
             {inputs.map(data => (
-              <Grid item xs={4}>
-                <TextField
-                  required
-                  id="outlined-required"
-                  label={data.label}
-                  inputProps={data}
-                  autoFocus
-                />
+              <Grid item xs={4} key={data.label}>
+                {data.type !== 'select' && (
+                  <TextField
+                    required
+                    id="outlined-required"
+                    label={data.label}
+                    inputProps={data}
+                    autoFocus
+                  />
+                )}
               </Grid>
             ))}
-            <Grid items xs={4}>
+            <Grid item xs={3}>
+              {selects.map(data => (
+                <Select
+                  key={data.label}
+                  isMulti
+                  options={data.options.map(x => ({
+                    value: x.id,
+                    label: x.name
+                  }))}
+                  onChange={data.onChange}
+                  defaultValue={data.defaultValue}
+                />
+              ))}
+            </Grid>
+            <Grid item xs={4}>
               <Button variant="contained" type="submit" sx={{ mt: 3, ml: 6 }}>
                 Aplicar cambios
               </Button>
@@ -42,27 +58,6 @@ export default function Form({ title, inputs, handleSubmit }) {
           </Grid>
         </Card>
       </Box>
-      {/*}
-    <form onSubmit={handleSubmit}>
-      <FormControl sx={{ width: '35ch' }} margin="normal">
-        {inputs.map(data => (
-          <TextField
-            sx={{ marginBottom: 2 }}
-            key={data.label}
-            inputProps={data}
-            label={data.label}
-            InputLabelProps={{ shrink: true }}
-          />
-        ))}
-        {/* <TextField label="name" sx={{ marginBottom: 2 }} value={name} onChange={e => setName(e.target.value)} />
-      <TextField label="price" sx={{ marginBottom: 2 }} type="number" />
-      <TextField label="stock" sx={{ marginBottom: 2 }} type="number" /> }
-        <Button variant="outlined" type="submit">
-          Submit
-        </Button>
-      </FormControl>
-    </form>
-    {*/}
     </>
   );
 }
