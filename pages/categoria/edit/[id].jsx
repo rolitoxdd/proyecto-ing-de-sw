@@ -4,6 +4,8 @@ import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import Form from '../../../components/Form';
 
+// Implementar autenticacion para pagina final
+
 function Edit({databaseData}){
     const router = useRouter();
     const [data, setData] = useState(databaseData);
@@ -26,14 +28,12 @@ function Edit({databaseData}){
     ]
     const handleSubmit = async e => {
         e.preventDefault();
-        console.log(e);
         const res = await fetch(`/api/category/`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ ...data, id })
         });
         const json = await res.json();
-        console.log(json);
         if (json.error) {
           alert(json.error);
         } else {
@@ -47,7 +47,6 @@ function Edit({databaseData}){
           body: JSON.stringify({ id })
         });
         const json = await res.json();
-        console.log(json);
         if (json.error) {
           alert(json.error);
         } else {
@@ -81,6 +80,6 @@ export async function getServerSideProps(context) {
   const { id } = context.query;
   const res = await fetch(baseURL + `/api/category/${id}`);
   const databaseData = await res.json();
-  console.log(databaseData);
   return { props: { databaseData } };
 }
+export default Edit;
