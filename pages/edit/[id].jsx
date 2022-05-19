@@ -2,7 +2,7 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import { Button } from '@mui/material';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Form from '../../components/Form';
 function Edit({ productsData, categories }) {
   const router = useRouter();
@@ -43,6 +43,16 @@ function Edit({ productsData, categories }) {
       value: data.details,
       required: false,
       onChange: e => setData(data => ({ ...data, details: e.target.value }))
+    },
+    {
+      label: 'enabled',
+      type: 'checkbox',
+      value: data.enabled,
+      required: false,
+      onChange: e => {
+        console.log(data);
+        setData(data => ({ ...data, enabled: e.target.checked }));
+      }
     }
   ];
 
@@ -54,8 +64,12 @@ function Edit({ productsData, categories }) {
         value: cat.categoryId,
         label: categories.find(categ => categ.id == cat.categoryId).name
       })),
-      // defaultValue: [{ label: 'lol', value: 1 }],
-      onChange: e => setData(data => ({ ...data, categories: e }))
+      onChange: e => {
+        setData(data => ({
+          ...data,
+          categories: e.map(cat => ({ categoryId: cat.value, name: cat.label }))
+        }));
+      }
     }
   ];
 
@@ -63,18 +77,18 @@ function Edit({ productsData, categories }) {
     e.preventDefault();
     console.log(e);
     console.log(data);
-    // const res = await fetch(`/api/products/`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ ...data, id })
-    // });
-    // const json = await res.json();
-    // console.log(json);
-    // if (json.error) {
-    //   alert(json.error);
-    // } else {
-    //   router.push('/');
-    // }
+    const res = await fetch(`/api/products/`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...data, id })
+    });
+    const json = await res.json();
+    console.log(json);
+    if (json.error) {
+      alert(json.error);
+    } else {
+      router.push('/');
+    }
   };
 
   const handleDelete = async () => {
@@ -120,7 +134,12 @@ export async function getServerSideProps(context) {
   const categoriesRes = await fetch(baseURL + `/api/category`);
   const productsData = await productsRes.json();
   const categories = await categoriesRes.json();
-  return { props: { productsData, categories } };
+  return {
+    props: {
+      productsData,
+      categories: categories
+    }
+  };
 }
 
 export default withPageAuthRequired(Edit);

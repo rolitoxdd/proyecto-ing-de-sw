@@ -5,10 +5,10 @@ import {
   TextField,
   Box,
   Grid,
-  Paper,
-  styled,
   CardHeader,
-  Card
+  Card,
+  Checkbox,
+  FormControlLabel
 } from '@mui/material';
 import Select from 'react-select';
 
@@ -25,13 +25,24 @@ export default function Form({ title, inputs, handleSubmit, selects = [] }) {
           <Grid container spacing={2}>
             {inputs.map(data => (
               <Grid item xs={4} key={data.label}>
-                {data.type !== 'select' && (
+                {data.type !== 'checkbox' ? (
                   <TextField
                     required
                     id="outlined-required"
                     label={data.label}
                     inputProps={data}
                     autoFocus
+                  />
+                ) : (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={data.value}
+                        onChange={data.onChange}
+                        inputProps={{ 'aria-label': 'controlled' }}
+                      />
+                    }
+                    label={data.label}
                   />
                 )}
               </Grid>
@@ -40,6 +51,7 @@ export default function Form({ title, inputs, handleSubmit, selects = [] }) {
               {selects.map(data => (
                 <Select
                   key={data.label}
+                  placeholder={data.label}
                   isMulti
                   options={data.options.map(x => ({
                     value: x.id,

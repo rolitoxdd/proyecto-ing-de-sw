@@ -26,6 +26,7 @@
 # WORKDIR /app
 
 # COPY --from=build /app/package.json .
+
 # COPY --from=build /app/next.config.js .
 # COPY --from=build /app/api-server.js .
 # COPY --from=build /app/.env.local .

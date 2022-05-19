@@ -16,6 +16,7 @@ model Products {
   name       String
   price      Int
   stock      Int                    @default(0)
+  enabled    Boolean                @default(false)
   img        String?
   details    String?
   categories CategoriesOnProducts[]

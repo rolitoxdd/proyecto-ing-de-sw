@@ -14,7 +14,7 @@ export default async function (req, res) {
 const test = withApiAuthRequired(async function shows(req, res) {
   try {
     if (req.method == 'POST') {
-      let { name, price, stock, img, details, categories } = req.body;
+      let { name, price, stock, img, details, categories, enabled } = req.body;
       price = Number(price);
       stock = Number(stock);
       console.log('cat', categories);
@@ -28,6 +28,7 @@ const test = withApiAuthRequired(async function shows(req, res) {
             stock,
             img,
             details,
+            enabled,
             categories: {
               create: categories.map(catId => ({
                 category: {
@@ -48,20 +49,39 @@ const test = withApiAuthRequired(async function shows(req, res) {
 
     // modificar productos
     else if (req.method == 'PUT') {
-      let { id, name, price, stock, img, details, categories } = req.body;
+      let { id, name, price, stock, img, details, categories, enabled } =
+        req.body;
       id = Number(id);
       price = Number(price);
       stock = Number(stock);
-      categories = categories.map(category => category.value);
+      console.log('categories', categories);
+      categories = categories.map(category => category.categoryId);
       try {
         const prismaRes = await client.products.update({
           where: { id },
-          data: { name, price, stock, img, details }
+          data: {
+            name,
+            price,
+            stock,
+            img,
+            details,
+            enabled,
+            categories: {
+              deleteMany: {},
+              create: categories.map(catId => ({
+                category: {
+                  connect: {
+                    id: catId
+                  }
+                }
+              }))
+            }
+          }
         });
         res.status(202).json(prismaRes);
       } catch (err) {
         console.error(err);
-        res.status(error.status || 500).json({ error: error.message });
+        res.status(error.status || 500).json({ error: err.message });
       }
     }
 

@@ -11,7 +11,9 @@ function Add({ categories }) {
     price: '',
     stock: '',
     img: '',
-    details: ''
+    details: '',
+    enabled: false,
+    categories: []
   });
   const inputs = [
     {
@@ -48,6 +50,16 @@ function Add({ categories }) {
       value: data.details,
       required: false,
       onChange: e => setData(data => ({ ...data, details: e.target.value }))
+    },
+    {
+      label: 'enabled',
+      type: 'checkbox',
+      value: data.enabled,
+      required: false,
+      onChange: e => {
+        console.log(data);
+        setData(data => ({ ...data, enabled: e.target.checked }));
+      }
     }
   ];
 
@@ -68,7 +80,6 @@ function Add({ categories }) {
       body: JSON.stringify({ ...data })
     });
     const json = await res.json();
-    console.log(json);
     if (json.error) {
       alert(json.error);
     } else {
