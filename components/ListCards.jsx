@@ -12,13 +12,26 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { useUser } from '@auth0/nextjs-auth0';
 
-const ProductCard = ({ id, img, name, details, price, user }) => (
+const ProductCard = ({ id, img, name, details, price, user, enabled }) => (
   <Grid item xs={4} key={id}>
     <Card
       sx={{ maxWidth: 300, pt: 2, minHeight: 500, display: 'flex' }}
       key={id}>
       <CardActionArea>
-        <CardMedia component="img" height="240" image={img} alt={name} />
+        <div style={{ position: 'relative', height: 240 }}>
+          <CardMedia
+            component="img"
+            // height="240"
+            image={img}
+            alt={name}
+            style={{ position: 'absolute' }}
+          />
+          {user && (
+            <p style={{ position: 'absolute' }}>
+              {enabled ? 'enabled' : 'disabled'}
+            </p>
+          )}
+        </div>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {name}
@@ -48,6 +61,13 @@ const ProductCard = ({ id, img, name, details, price, user }) => (
               Edit
             </Button>
           )}
+          {/* {user && (
+            <>
+              <br />
+              <hr />
+              <span>{enabled ? 'enabled' : 'disabled'}</span>
+            </>
+          )} */}
         </CardActions>
       </CardActionArea>
     </Card>
@@ -59,7 +79,7 @@ const ListCard = ({ products }) => {
   return (
     <Grid container spacing={2}>
       {user
-        ? products.map(({ name, img, price, details, id }, index) => (
+        ? products.map(({ name, img, price, details, id, enabled }, index) => (
             <ProductCard
               id={id}
               name={name}
@@ -67,6 +87,7 @@ const ListCard = ({ products }) => {
               price={price}
               details={details}
               user={user}
+              enabled={enabled}
             />
           ))
         : products
