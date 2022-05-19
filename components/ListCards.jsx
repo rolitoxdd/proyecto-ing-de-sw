@@ -18,7 +18,7 @@ const ProductCard = ({ id, img, name, details, price, user, enabled }) => (
       sx={{ maxWidth: 300, pt: 2, minHeight: 500, display: 'flex' }}
       key={id}>
       <CardActionArea>
-        <div style={{ position: 'relative', height: 240 }}>
+        <div style={{ position: 'relative', height: 240, overflow:"hidden" }}>
           <CardMedia
             component="img"
             // height="240"
@@ -33,7 +33,10 @@ const ProductCard = ({ id, img, name, details, price, user, enabled }) => (
           )}
         </div>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div"
+          sx={{
+            lineHeight:1.48,
+          }}>
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
