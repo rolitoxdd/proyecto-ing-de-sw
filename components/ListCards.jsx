@@ -18,7 +18,7 @@ const ProductCard = ({ id, img, name, details, price, user, enabled }) => (
       sx={{ maxWidth: 300, pt: 2, minHeight: 500, display: 'flex' }}
       key={id}>
       <CardActionArea>
-        <div style={{ position: 'relative', height: 240, overflow:"hidden" }}>
+        <div style={{ position: 'relative', height: 240, overflow: 'hidden' }}>
           <CardMedia
             component="img"
             // height="240"
@@ -33,10 +33,13 @@ const ProductCard = ({ id, img, name, details, price, user, enabled }) => (
           )}
         </div>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div"
-          sx={{
-            lineHeight:1.48,
-          }}>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              lineHeight: 1.48
+            }}>
             {name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -84,6 +87,7 @@ const ListCard = ({ products }) => {
       {user
         ? products.map(({ name, img, price, details, id, enabled }, index) => (
             <ProductCard
+              key={id}
               id={id}
               name={name}
               img={img}
@@ -97,6 +101,7 @@ const ListCard = ({ products }) => {
             .filter(product => product.enabled)
             .map(({ name, img, price, details, id, enabled }, index) => (
               <ProductCard
+                key={id}
                 id={id}
                 name={name}
                 img={img}

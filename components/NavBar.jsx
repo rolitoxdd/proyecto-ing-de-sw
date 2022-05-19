@@ -21,7 +21,8 @@ import Link from 'next/link';
 const pages = [
   { auth: false, href: '/', text: 'Home' },
   { auth: true, href: '/add', text: 'Agregar producto' },
-  { auth: false, href: '/list', text: 'Productos' }
+  { auth: false, href: '/list', text: 'Productos' },
+  { auth: true, href: '/list-categories', text: 'Listar categorias' }
 ];
 
 const userLinks = [

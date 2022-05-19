@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 export default function ListCategories({ categories }) {
   return (
+    <>
     <ul>
       {categories.map(cat => (
         <li key={cat.id}>
@@ -11,6 +12,7 @@ export default function ListCategories({ categories }) {
         </li>
       ))}
     </ul>
+      </>
   );
 }
 export async function getServerSideProps() {
