@@ -1,36 +1,22 @@
 import { useEffect, useState } from 'react';
-// import { ListGroupItem, ListGroup, CardGroup } from 'reactstrap';
-// import ProductCard from '../components/ProductCard';
-// import {
-//   Card,
-//   CardImg,
-//   CardBody,
-//   CardTitle,
-//   CardSubtitle,
-//   Button,
-//   Row,
-//   Col,
-//   CardColumns
-// } from 'reactstrap';
+import Link from 'next/link';
+
 import Select from 'react-select';
-import ListCard from '../components/ListCards';
+import ListCard from '../../components/ListCards';
 
 export default function List() {
   const [products, setProducts] = useState([]); // name, img, price, details, stock
+  const [categories, setCategories] = useState([]);
   useEffect(async () => {
-    const res = await fetch('./api/products');
-    const data = await res.json();
-    setProducts(data);
+    const [dataProducts, dataCategories] = await Promise.all([
+      fetch('./api/products').then(res => res.json()),
+      fetch('./api/category').then(res => res.json())
+    ]);
+    setProducts(dataProducts);
+    setCategories(dataCategories);
   }, []);
   return (
     <>
-      {/* <div
-        style={{
-          width: '95%',
-          height: 50,
-          background: 'blue',
-          marginBottom: 20
-        }}> */}
       <Select
         instanceId={'select'}
         options={[
@@ -54,7 +40,27 @@ export default function List() {
           }
         }}
       />
-      <ListCard products={products} />
+      <div style={{ display: 'flex' }}>
+        <aside style={{ marginRight: 25, marginTop: 15 }}>
+          <nav>
+            <ul>
+              <li>
+                <Link href="/list">
+                  <a>Todos</a>
+                </Link>
+              </li>
+              {categories.map(cat => (
+                <li key={cat.id}>
+                  <Link href={`/list/${cat.id}`}>
+                    <a>{cat.name}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+        <ListCard products={products} />
+      </div>
     </>
   );
 }
