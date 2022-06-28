@@ -101,7 +101,7 @@ function Add({ categories }) {
   );
 }
 export async function getServerSideProps(context) {
-  const baseURL = 'http://localhost:3000';
+  const baseURL = process.env.BASE_HOSTNAME;
   const categoriesRes = await fetch(baseURL + `/api/category`);
   const categories = await categoriesRes.json();
   return { props: { categories } };

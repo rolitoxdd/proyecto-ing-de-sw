@@ -128,7 +128,7 @@ function Edit({ productsData, categories }) {
 }
 
 export async function getServerSideProps(context) {
-  const baseURL = `http://localhost:${process.env.PORT || 3000}`;
+  const baseURL = process.env.BASE_HOSTNAME;
   const { id } = context.query;
   const productsRes = await fetch(baseURL + `/api/products/${id}`);
   const categoriesRes = await fetch(baseURL + `/api/category`);

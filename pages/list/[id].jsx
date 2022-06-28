@@ -59,10 +59,10 @@ export default function List({ products, categories }) {
 export async function getServerSideProps(context) {
   const id = context.query.id;
   const [products, categories] = await Promise.all([
-    fetch('http://localhost:3000/api/products/category/' + id).then(res =>
-      res.json()
+    fetch(`${process.env.BASE_HOSTNAME}/api/products/category/${id}`).then(
+      res => res.json()
     ),
-    fetch('http://localhost:3000/api/category').then(res => res.json())
+    fetch(`${process.env.BASE_HOSTNAME}/api/category`).then(res => res.json())
   ]);
   console.log(categories);
   return {
