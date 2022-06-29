@@ -9,6 +9,7 @@ import {
   Container
 } from '@mui/material';
 import React from 'react';
+import Link from 'next/link';
 import { Button } from '@mui/material';
 import { useUser } from '@auth0/nextjs-auth0';
 
@@ -40,7 +41,7 @@ const ProductCard = ({ id, img, name, details, price, user, enabled }) => (
             sx={{
               lineHeight: 1.48
             }}>
-            {name}
+            <Link href={`/products/${id}`}>{name}</Link>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {details}
