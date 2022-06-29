@@ -36,3 +36,11 @@ model CategoriesOnProducts {
 
   @@id([categoryId, productId])
 }
+
+model Purchases {
+  purchaseId Int    @id @default(autoincrement())
+  id         Int
+  name       String
+  price      Int
+  nickname   String
+}
