@@ -24,7 +24,8 @@ const pages = [
   { auth: true, href: '/add', text: 'Agregar producto' },
   { auth: false, href: '/list', text: 'Productos' },
   { auth: true, href: '/list-categories', text: 'Categorias' },
-  { auth: true, href: '/categoria/add', text: 'Agregar categoria' }
+  { auth: true, href: '/categoria/add', text: 'Agregar categoria' },
+  { auth: true, href: '/shoppingHistory', text: 'Historial de compras' }
 ];
 
 const userLinks = [
