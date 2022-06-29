@@ -13,6 +13,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import { useUser } from '@auth0/nextjs-auth0';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import PageLink from './PageLink';
 import AnchorLink from './AnchorLink';
@@ -68,6 +69,12 @@ const NavBar = () => {
                   </NavItem>
                 );
               })}
+              <NavItem>
+                <PageLink href="/shoppingCart" className="nav-link">
+                  <ShoppingCartIcon />
+                  Ir al carrito
+                </PageLink>
+              </NavItem>
             </Nav>
             <Nav className="d-none d-md-block" navbar>
               {!isLoading && !user && (

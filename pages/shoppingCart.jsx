@@ -41,7 +41,7 @@ export default function ShoppingCart() {
           </div>
         </div>
       ))}
-      {Object.keys(shoppingCart).length > 0 && (
+      {Object.keys(shoppingCart).length > 0 ? (
         <Button
           variant="contained"
           style={{ width: '100%', marginTop: 20, marginBottom: 20 }}
@@ -68,6 +68,10 @@ export default function ShoppingCart() {
           }}>
           COMPRAR
         </Button>
+      ) : (
+        <Alert severity="warning">
+          No existen productos en su carrito <a href="/">Ir al home</a>
+        </Alert>
       )}
       {successfullPurchase && (
         <Alert severity="success">
