@@ -46,5 +46,5 @@ COPY package.json package-lock.json /
 WORKDIR /app
 # CMD ["npx","prisma","generate","&&","npx","prisma","migrate","dev", "--name", "init","&&","npm", "run", "dev"]
 # CMD npx prisma generate && sleep 8 && npx prisma migrate dev --create-only && npx prisma migrate deploy --schema=./prisma/schema.prisma && npx prisma db seed && npm run build && npm run serve
- CMD npx prisma generate && sleep 8 && npx prisma db push && npx prisma db seed && npm run build && npm run serve
-# CMD npx prisma generate && sleep 8 && npx prisma db push --accept-data-loss && npx prisma db seed && npm run dev
+# CMD npx prisma generate && sleep 8 && npx prisma db push && npx prisma db seed && npm run build && npm run serve
+CMD npx prisma generate && sleep 8 && npx prisma db push --accept-data-loss && npx prisma db seed && npm run dev
