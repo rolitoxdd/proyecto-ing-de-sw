@@ -1,35 +1,61 @@
-export default function ShoppingHistory({ data }) {
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  textAlign: 'center',
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14
+  }
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0
+  }
+}));
+
+export default function CustomizedTables({ data }) {
   return (
-    <table style={{ borderCollapse: 'collapse', border: '1px solid black' }}>
-      <tr>
-        <th style={{ border: '1px solid black', padding: '0 15px' }}>id</th>
-        <th style={{ border: '1px solid black', padding: '0 15px' }}>
-          product id
-        </th>
-        <th style={{ border: '1px solid black', padding: '0 15px' }}>name</th>
-        <th style={{ border: '1px solid black', padding: '0 15px' }}>price</th>
-        <th style={{ border: '1px solid black', padding: '0 15px' }}>
-          nickname
-        </th>
-      </tr>
-      {data.map(({ id, purchaseId, name, price, nickname }) => (
-        <tr>
-          <td style={{ border: '1px solid black', padding: '0 15px' }}>
-            {purchaseId}
-          </td>
-          <td style={{ border: '1px solid black', padding: '0 15px' }}>{id}</td>
-          <td style={{ border: '1px solid black', padding: '0 15px' }}>
-            {name}
-          </td>
-          <td style={{ border: '1px solid black', padding: '0 15px' }}>
-            {price}
-          </td>
-          <td style={{ border: '1px solid black', padding: '0 15px' }}>
-            {nickname}
-          </td>
-        </tr>
-      ))}
-    </table>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Id</StyledTableCell>
+            <StyledTableCell align="right">Id producto</StyledTableCell>
+            <StyledTableCell align="right">Nombre producto</StyledTableCell>
+            <StyledTableCell align="right">Precio</StyledTableCell>
+            <StyledTableCell align="right">Nombre usuario</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map(row => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {row.purchaseId}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.id}</StyledTableCell>
+              <StyledTableCell align="right">{row.name}</StyledTableCell>
+              <StyledTableCell align="right">{row.price}</StyledTableCell>
+              <StyledTableCell align="right">{row.nickname}</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 
