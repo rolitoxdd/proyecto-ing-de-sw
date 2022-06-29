@@ -1,7 +1,9 @@
 import { Card, CardMedia, Button } from '@mui/material';
 import ProductCard from '../../components/ProductCard';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 export default function Product({ data }) {
+  const [shoppingCart, setShoppingCart] = useLocalStorage('shoppingCart', {});
   return (
     <div style={{ display: 'flex' }}>
       <div style={{ width: '100%' }}>
@@ -17,7 +19,10 @@ export default function Product({ data }) {
         <h4>$ {data.price}</h4>
         <div>stock: {data.stock}</div>
         <p style={{ color: 'grey', marginTop: 10 }}>{data.details}</p>
-        <Button style={{ marginTop: 20 }} variant="contained">
+        <Button
+          style={{ marginTop: 20 }}
+          variant="contained"
+          onClick={() => setShoppingCart({ ...shoppingCart, [data.id]: data })}>
           Agregar al carrito
         </Button>
       </div>
